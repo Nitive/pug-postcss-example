@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "templates": "npx pug --watch ./blocks --out build --basedir=.",
-    "css": "npx postcss ./blocks/**/*.css --base blocks --dir build",
-    "start": "concurrently \"npm run templates\" \"npm run css\"",
+    "templates": "pug --watch ./blocks --out build --basedir=.",
+    "css": "postcss --watch ./blocks/**/*.css --base blocks --dir build",
+    "common-css": "postcss --watch ./common/style.css --output build/common.css",
+    "server": "browser-sync start --server --no-open --files .",
+    "start": "concurrently \"npm run templates\" \"npm run css\" \"npm run common-css\" \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "browser-sync": "^2.24.7",
     "concurrently": "^4.0.1",
     "postcss": "^7.0.2",
     "postcss-cli": "^6.0.0",
